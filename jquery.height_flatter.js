@@ -25,13 +25,13 @@
 
   function changeHeight($elms, column_count){
     var highest = Math.max.apply(null, $elms.map(function(i){
-      var $_this  = $(this),
-          height  = $_this.height(),
-          classes = $.unique($_this.children().map(function(){
+      var $this  = $(this),
+          height  = $this.height(),
+          children = $.unique($this.children().map(function(){
             return $(this).attr('class');
           }).get());
 
-      $(classes).each(function(){
+      $(children).each(function(){
         changeHeight($elms.children('.' + this), column_count);
       });
       return height;
@@ -40,9 +40,7 @@
     $elms.height(highest);
   }
 
-  $.fn.extend({
-    flatten : function() {
-      return flatten(this);
-    }
-  });
+  $.fn.flatten = function() {
+    return flatten(this);
+  }
 })(jQuery);
